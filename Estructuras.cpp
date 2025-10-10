@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+//Programa que da consejos de boxeo segun el nivel del usuario
 int main(){
     //Se declara la variable nivel
     string nivel;
