@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+        IMG Example
+        </title>
+    </head>
+    <body>
+        
+        <canvas></canvas>
+        <script>
+            let lienzo = document.querySelector("canvas")
+            lienzo.width = 800
+            lienzo.height = 600
+            let contexto = lienzo.getContext("2d")
+
+            let imagen = new Image()
+            imagen.src = "/CLASE/EjerciciosClase/descarga.jpeg"
+
+            imagen.onload = function(){
+                contexto.drawImage(imagen, 0, 0)
+                let pixel = contexto.getImageData(0,0,1,1)
+                pixel.data[0] = 255 // rojo
+                pixel.data[1] = 0   // verde
+                pixel.data [2] = 0   // azul
+                pixel.data [3] = 255 // alpha
+l 
+
+                contexto.putImageData (pixel,0,0)
+            }
+
+
+        </script>
+    </body>
+</html>

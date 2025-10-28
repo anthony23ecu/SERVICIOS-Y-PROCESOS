@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% set editing = (mode == "edit") %}
+{% block title %}{{ "Editar" if editing else "Nuevo" }} cliente | ERP{% endblock %}
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h1>{{ "Editar" if editing else "Nuevo" }} cliente</h1>
+    <a href="{{ url_for('list_clients') }}" class="btn-outline">Volver</a>
+  </div>
+
+  {% if error %}
+  <div class="alert-error" style="margin-bottom:1rem;">{{ error }}</div>
+  {% endif %}
+
+  <form method="POST" class="form-grid">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>Nombre
+      <input name="nombre" required value="{{ (c.nombre if c else '')|e }}">
+    </label>
+    <label>Email
+      <input name="email" type="email" value="{{ (c.email if c else '')|e }}">
+    </label>
+    <label>Teléfono
+      <input name="telefono" value="{{ (c.telefono if c else '')|e }}">
+    </label>
+    <label>Empresa
+      <input name="empresa" value="{{ (c.empresa if c else '')|e }}">
+    </label>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">{{ "Guardar" if editing else "Crear" }}</button>
+      <a class="btn-outline" href="{{ url_for('list_clients') }}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

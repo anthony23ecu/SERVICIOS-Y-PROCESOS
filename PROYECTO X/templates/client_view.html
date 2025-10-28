@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Cliente #{{ c.id }} | ERP{% endblock %}
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h1>Cliente #{{ c.id }}</h1>
+    <div class="actions">
+      <a class="btn-outline" href="{{ url_for('edit_client', client_id=c.id) }}">Editar</a>
+      <a class="btn-outline" href="{{ url_for('list_clients') }}">Volver</a>
+    </div>
+  </div>
+
+  <div class="detail">
+    <div><strong>Nombre:</strong> {{ c.nombre }}</div>
+    <div><strong>Empresa:</strong> {{ c.empresa or "-" }}</div>
+    <div><strong>Email:</strong> {{ c.email or "-" }}</div>
+    <div><strong>Teléfono:</strong> {{ c.telefono or "-" }}</div>
+    <div><strong>Alta:</strong> {{ c.created_at }}</div>
+  </div>
+
+  <form method="POST" action="{{ url_for('delete_client', client_id=c.id) }}" onsubmit="return confirm('¿Borrar cliente #{{ c.id }}?');" style="margin-top:1rem;">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button type="submit" class="btn-danger">Borrar</button>
+  </form>
+</div>
+{% endblock %}
